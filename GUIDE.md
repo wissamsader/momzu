@@ -60,9 +60,9 @@ There are three ways to give it a command:
 
 - **Hold the spacebar** while the Momzu window is open (and you're not typing in
   the text box), speak, then release. Your words are sent when you let go.
-- **Press ⌥Space (Option+Space) from anywhere** on your Mac — even when Momzu
-  is in the background — to switch the microphone on or off. ⌘⇧Space does
-  the same.
+- **Press ⌃⌥⌘ (Control+Option+Command together) from anywhere** on your Mac —
+  even when Momzu is in the background — to switch the microphone on or off.
+  ⌥Space and ⌘⇧Space do the same.
 - **Type** in the input bar at the bottom of the window, like a chat.
 
 Momzu replies out loud and on screen. Keep questions short and natural —
