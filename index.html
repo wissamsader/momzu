@@ -3,8 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>momzu — it's asleep right now</title>
+<title>momzu — it's asleep right now · a voice AI for your mac</title>
 <meta name="description" content="Momzu — a voice AI that lives on your Mac. Say its name hands-free. It talks, browses, builds, remembers, reads your calendar, plays your music, runs routines — even from your phone. Claude, DeepSeek, Gemini or fully local. Voice never leaves your Mac. Free for macOS.">
+<link rel="canonical" href="https://momzu.space/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://momzu.space/">
+<meta property="og:site_name" content="Momzu">
+<meta property="og:title" content="Momzu — a voice AI that lives on your Mac">
+<meta property="og:description" content="Say its name hands-free. It talks, browses, remembers, reads your calendar, plays your music — even from your phone. Free for macOS. Voice never leaves your Mac.">
+<meta property="og:image" content="https://momzu.space/og.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Momzu — a voice AI that lives on your Mac">
+<meta name="twitter:description" content="Say its name hands-free. It talks, browses, remembers, plays your music — even from your phone. Free for macOS.">
+<meta name="twitter:image" content="https://momzu.space/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Momzu",
+  "operatingSystem": "macOS 13 or later (Apple Silicon)",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "A voice AI that lives on your Mac. Say its name hands-free — it talks, browses, remembers, reads your calendar, plays your music, runs routines, even from your phone. Voice never leaves your Mac.",
+  "url": "https://momzu.space/",
+  "downloadUrl": "https://github.com/wissamsader/momzu/releases/latest/download/Momzu.dmg",
+  "author": { "@type": "Organization", "name": "STUDIOMORPHIK", "url": "https://studiomorphik.com" }
+}
+</script>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1035,7 +1062,7 @@ section { position: relative; z-index: 2; }
 
 /* coffee */
 .coffee {
-  margin-top: 10vh;
+  margin-top: 6vh;
   display: inline-flex; align-items: center; gap: 14px;
   font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
   color: #f0d9b5; text-decoration: none;
@@ -1483,16 +1510,6 @@ footer a:hover { color: var(--text); }
   </a>
   <div class="dl-meta reveal">free · apple silicon · no account · no tracking</div>
 
-  <div class="dl-setup reveal">
-    <div class="ds-title">two minutes of setup</div>
-    <ol>
-      <li><b>open it</b> — drag momzu into applications. first launch: right-click → open → open (it's unsigned). allow the microphone. it downloads its ears once (~900 mb, one time).</li>
-      <li><b>connect a mind</b> — momzu is the body; you pick the brain. using <b>claude</b> (recommended)? install <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude code</a> in terminal — <code>curl -fsSL https://claude.ai/install.sh | bash</code> — then run <code>claude</code> once and sign in with your claude account. otherwise press <b>keys</b> in momzu and paste a deepseek or gemini api key — or go fully offline with ollama.</li>
-      <li><b>talk</b> — hold space and speak. or switch on hands-free and just say "momzu" from across the room.</li>
-    </ol>
-    <div class="ds-note">full manual: <a href="guide.txt" target="_blank">read me first</a></div>
-  </div>
-
   <a class="coffee reveal" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24">
       <path d="M5 10h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-6z"/>
@@ -1502,6 +1519,16 @@ footer a:hover { color: var(--text); }
     <span>it helped you? buy me a coffee</span>
   </a>
   <div class="coffee-note">momzu runs on caffeine, apparently</div>
+
+  <div class="dl-setup reveal">
+    <div class="ds-title">two minutes of setup</div>
+    <ol>
+      <li><b>open it</b> — drag momzu into applications. first launch: right-click → open → open (it's unsigned). allow the microphone. it downloads its ears once (~900 mb, one time).</li>
+      <li><b>connect a mind</b> — momzu is the body; you pick the brain. using <b>claude</b> (recommended)? install <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude code</a> in terminal — <code>curl -fsSL https://claude.ai/install.sh | bash</code> — then run <code>claude</code> once and sign in with your claude account. otherwise press <b>keys</b> in momzu and paste a deepseek or gemini api key — or go fully offline with ollama.</li>
+      <li><b>talk</b> — hold space and speak. or switch on hands-free and just say "momzu" from across the room.</li>
+    </ol>
+    <div class="ds-note">full manual: <a href="guide.txt" target="_blank">read me first</a></div>
+  </div>
 </section>
 
 <footer>
