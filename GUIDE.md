@@ -69,19 +69,11 @@ Momzu replies out loud and on screen. Keep questions short and natural —
 "what's on my calendar", "open Spotify", "remind me to call Alex at 6" — it's a
 conversation, not a search engine.
 
-### Hands-free ("Momzu, …")
+A soft rising **chime** right after you speak means Momzu got your message
+and is on it — no filler words, just the chime, then the answer or the result.
 
-Turn on **HANDS-FREE** (button in the top bar, or click the face in the menu
-bar → Hands-Free) and Momzu listens continuously:
-
-- Say **"Momzu"** followed by your request. A soft rising **chime** means it
-  heard you — no chime, no luck: just say the name again.
-- For about 12 seconds after each answer you can keep talking without
-  repeating "Momzu".
 - Say **"stop"**, **"wait"** or **"cancel"** to instantly abort whatever it's
   doing — a falling chime confirms. This is immediate, even mid-task.
-- Speak naturally: Momzu waits for a proper pause before acting, so a breath
-  mid-sentence won't cut you off.
 - If it's busy and you ask for something new, it queues your request and runs
   it right after — nothing you say gets lost.
 
@@ -96,7 +88,7 @@ The animated face tells you what Momzu is doing:
 | Squinting eyes | Thinking / working on your request |
 | Mouth moving | Speaking its answer |
 | Red ring | Something went wrong — try again |
-| Eyes closed, dim glow | Sleeping — say "Momzu" (hands-free) or use the mic shortcut |
+| Eyes closed, dim glow | Sleeping — use the mic shortcut or start typing to wake it |
 
 While Momzu works on a long task the face keeps its squinting "thinking" look
 the whole time — if it's slow, it's working, not stuck.
@@ -132,9 +124,6 @@ respond, its key or login is missing — pick another one or click **KEYS**.
 - **"Every morning at 8:30, give me my briefing."** — Momzu will speak a
   morning summary (date, weather, calendar, reminders) on its own. Say
   "remove the morning briefing" to stop it.
-- **Hands-free**: press **HANDS-FREE** in the top bar, then just say
-  **"Momzu, …"** from across the room. Right after it answers you can reply
-  without repeating the name.
 - **On your phone**: click **📱 PHONE** in the top bar and scan the QR code
   with your phone camera (same Wi-Fi). You can chat with your Mac — typing
   AND voice — from anywhere in the house. The first time, your phone's
@@ -145,7 +134,7 @@ respond, its key or login is missing — pick another one or click **KEYS**.
 
 ## Tips
 
-- Speak normally. You only need the wake word ("Momzu") in HANDS-FREE mode.
+- Speak normally — no wake word needed, the mic shortcut is the trigger.
 - If Momzu mishears you, just say "no, I meant…" — it remembers the conversation.
 - Momzu quietly remembers useful things about you between conversations
   (projects, people, preferences) — everything stays on your Mac. The MEMORY

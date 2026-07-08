@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>momzu — it's asleep right now · a voice AI for your mac</title>
-<meta name="description" content="Momzu — a voice AI that lives on your Mac. Say its name hands-free. It talks, browses, builds, remembers, reads your calendar, plays your music, runs routines — even from your phone. Claude, DeepSeek, Gemini or fully local. Voice never leaves your Mac. Free for macOS.">
+<meta name="description" content="Momzu — a voice AI that lives on your Mac. Press a key and speak. It talks, browses, builds, remembers, reads your calendar, plays your music, runs routines — even from your phone. Claude, DeepSeek, Gemini or fully local. Voice never leaves your Mac. Free for macOS.">
 <link rel="canonical" href="https://momzu.space/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://momzu.space/">
 <meta property="og:site_name" content="Momzu">
 <meta property="og:title" content="Momzu — a voice AI that lives on your Mac">
-<meta property="og:description" content="Say its name hands-free. It talks, browses, remembers, reads your calendar, plays your music — even from your phone. Free for macOS. Voice never leaves your Mac.">
+<meta property="og:description" content="Press a key and speak. It talks, browses, remembers, reads your calendar, plays your music — even from your phone. Free for macOS. Voice never leaves your Mac.">
 <meta property="og:image" content="https://momzu.space/og.png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Momzu — a voice AI that lives on your Mac">
-<meta name="twitter:description" content="Say its name hands-free. It talks, browses, remembers, plays your music — even from your phone. Free for macOS.">
+<meta name="twitter:description" content="Press a key and speak. It talks, browses, remembers, plays your music — even from your phone. Free for macOS.">
 <meta name="twitter:image" content="https://momzu.space/og.png">
 <script type="application/ld+json">
 {
@@ -26,7 +26,7 @@
   "operatingSystem": "macOS 13 or later (Apple Silicon)",
   "applicationCategory": "UtilitiesApplication",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "A voice AI that lives on your Mac. Say its name hands-free — it talks, browses, remembers, reads your calendar, plays your music, runs routines, even from your phone. Voice never leaves your Mac.",
+  "description": "A voice AI that lives on your Mac. Press a key and speak — it talks, browses, remembers, reads your calendar, plays your music, runs routines, even from your phone. Voice never leaves your Mac.",
   "url": "https://momzu.space/",
   "downloadUrl": "https://github.com/wissamsader/momzu/releases/latest/download/Momzu.dmg",
   "author": { "@type": "Organization", "name": "STUDIOMORPHIK", "url": "https://studiomorphik.com" }
@@ -721,52 +721,6 @@ section { position: relative; z-index: 2; }
 .d8ok { color: #67e8a2; opacity: 0; font-size: 10px; animation: d8ok 5s infinite; }
 @keyframes d8ok { 0%, 40% { opacity: 0; } 50%, 80% { opacity: 1; } 92%, 100% { opacity: 0; } }
 
-/* d9 · wake word */
-.d9 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
-.d9face {
-  position: relative;
-  width: 82px; height: 82px; border-radius: 50%;
-  background: #0b0d11;
-  border: 3px solid var(--ring-sleep);
-  display: flex; align-items: center; justify-content: center; gap: 15px;
-  animation: d9ring 8s infinite;
-}
-.d9face::after {
-  content: ''; position: absolute; bottom: 17px; left: 50%;
-  transform: translateX(-50%);
-  width: 20px; height: 3px; border-radius: 2px;
-  background: #dff8ff; opacity: 0.75;
-}
-@keyframes d9ring {
-  0%, 42% { border-color: var(--ring-sleep); box-shadow: none; }
-  48%, 80% { border-color: var(--ring-awake); box-shadow: 0 0 24px rgba(86,189,255,0.35); }
-  90%, 100% { border-color: var(--ring-sleep); box-shadow: none; }
-}
-.d9face i {
-  width: 13px; height: 3px; border-radius: 6px;
-  background: var(--slit-a);
-  animation: d9eye 8s infinite;
-}
-@keyframes d9eye {
-  0%, 43% { height: 3px; background: var(--slit-a); }
-  49%, 80% { height: 19px; background: #dff8ff; box-shadow: 0 0 10px rgba(86,189,255,0.45); }
-  90%, 100% { height: 3px; background: var(--slit-a); box-shadow: none; }
-}
-.d9lines { position: relative; height: 1.4em; width: 100%; text-align: center; font-size: 11px; letter-spacing: 0.06em; }
-.d9lines span { position: absolute; left: 0; right: 0; opacity: 0; }
-.d9lines .a { color: var(--dimmer); animation: d9a 8s infinite; }
-.d9lines .b { color: #dff8ff; letter-spacing: 0.34em; text-transform: uppercase; text-shadow: 0 0 18px rgba(86,189,255,0.5); animation: d9b 8s infinite; }
-.d9lines .c { color: #8fd8ff; animation: d9c 8s infinite; }
-@keyframes d9a { 0%, 6% { opacity: 0; } 10%, 34% { opacity: 1; } 38%, 100% { opacity: 0; } }
-@keyframes d9b { 0%, 42% { opacity: 0; } 46%, 60% { opacity: 1; } 64%, 100% { opacity: 0; } }
-@keyframes d9c { 0%, 64% { opacity: 0; } 68%, 84% { opacity: 1; } 90%, 100% { opacity: 0; } }
-.d9cap {
-  position: absolute; bottom: 10px; left: 0; right: 0;
-  text-align: center;
-  font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--dimmer);
-}
-
 /* d10 · calendar */
 .d10 { display: flex; flex-direction: column; justify-content: center; gap: 9px; padding: 26px 28px 20px; }
 .d10row {
@@ -1119,7 +1073,6 @@ footer a:hover { color: var(--text); }
   .d3wrap { transform: scale(0.88); }
   .d13 { gap: 16px; }
   .d13phone { width: 74px; height: 138px; }
-  .d9lines { font-size: 10px; }
   .specs { padding: 6vh 22px 10vh; }
   .spec { flex-direction: column; gap: 7px; padding: 15px 0; }
   .spec .sv { text-align: left; }
@@ -1221,7 +1174,7 @@ footer a:hover { color: var(--text); }
     <div class="num">01</div>
     <div>
       <h3>Hold space. Speak.</h3>
-      <p>Press and hold <span class="key">space</span>, say what you want, let go. Or hit <span class="key">⌘⇧J</span> from anywhere on your Mac. It listens, thinks, and talks back. And when you'd rather write than talk, dictation mode types your words into any app.</p>
+      <p>Press and hold <span class="key">space</span>, say what you want, let go. Or hit <span class="key">⌥space</span> from anywhere on your Mac. A soft chime tells you it heard — then it thinks, and talks back. If it runs off with the wrong idea, say <span class="key">stop</span>. It stops. Mid-sentence, mid-task, instantly. And when you'd rather write than talk, dictation mode types your words into any app.</p>
     </div>
     <div class="demo d1" id="demo-voice">
       <div class="tag">sim · voice</div>
@@ -1233,24 +1186,6 @@ footer a:hover { color: var(--text); }
 
   <div class="ability reveal">
     <div class="num">02</div>
-    <div>
-      <h3>Or just say its name.</h3>
-      <p>Hands-free mode keeps one ear open — on your device, never the cloud. It sleeps through your calls, your music, your rambling, and wakes the instant you say <span class="key">momzu</span> — a soft chime tells you it heard. Ask the thing, get the answer, it goes back to sleep on its own. And if it runs off with the wrong idea, say <span class="key">stop</span>. It stops. Mid-sentence, mid-task, instantly.</p>
-    </div>
-    <div class="demo d9">
-      <div class="tag">sim · wake word</div>
-      <div class="d9face"><i></i><i></i></div>
-      <div class="d9lines">
-        <span class="a">“…anyway, tuesday works for me”</span>
-        <span class="b">momzu</span>
-        <span class="c">“yes? i'm listening.”</span>
-      </div>
-      <div class="d9cap">listens on device · chimes when it hears its name</div>
-    </div>
-  </div>
-
-  <div class="ability reveal">
-    <div class="num">03</div>
     <div>
       <h3>Any brain you want.</h3>
       <p>Claude in full agent mode, DeepSeek, Gemini — or a completely local model through Ollama. Switch minds in one click, and dial how hard each one thinks: from instant answers to deep reasoning. Momzu is the body; you choose the mind.</p>
@@ -1273,7 +1208,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">04</div>
+    <div class="num">03</div>
     <div>
       <h3>Your voice never leaves.</h3>
       <p>Speech recognition is whisper.cpp running on your machine. Replies are spoken by your machine. No audio is ever uploaded, recorded, or heard by anyone but Momzu — the cloud only ever sees text, and only when you pick a cloud model.</p>
@@ -1297,7 +1232,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">05</div>
+    <div class="num">04</div>
     <div>
       <h3>It drives your browser.</h3>
       <p>Your real Chrome — your logins, your tabs. It searches, reads pages, fills forms, clicks buttons, compares prices while you make coffee. Like handing your mouse to something that never gets tired.</p>
@@ -1315,7 +1250,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">06</div>
+    <div class="num">05</div>
     <div>
       <h3>It sees your screen.</h3>
       <p>Ask "what's on my screen?" and it takes a look — reads the clutter, finds the thing, tells you what matters. Useful when an error pops up and you can't be bothered to read it yourself.</p>
@@ -1334,7 +1269,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">07</div>
+    <div class="num">06</div>
     <div>
       <h3>It builds finished work.</h3>
       <p>Ask for a website and it writes one. A script, a summary, a folder sorted and renamed — it doesn't just answer questions, it leaves finished work on your disk while you talk.</p>
@@ -1355,7 +1290,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">08</div>
+    <div class="num">07</div>
     <div>
       <h3>It remembers you.</h3>
       <p>Preferences, projects, the way you like things done — kept as plain files on your own disk, readable any time. Nothing hidden, nothing synced away. Tell it to forget something and it's gone.</p>
@@ -1370,7 +1305,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">09</div>
+    <div class="num">08</div>
     <div>
       <h3>It knows your day.</h3>
       <p>Connect Google Calendar once, then just ask — "what's on today?", "am I free thursday?". It reads your schedule out loud and tells you what actually matters, the way a person would.</p>
@@ -1385,7 +1320,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">10</div>
+    <div class="num">09</div>
     <div>
       <h3>It speaks on schedule.</h3>
       <p>"Every morning at 8:30, brief me." From then on it just happens — the date, the weather, your calendar, spoken out loud while you make coffee. Routines are small rituals Momzu keeps for you, no tapping required.</p>
@@ -1399,7 +1334,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">11</div>
+    <div class="num">10</div>
     <div>
       <h3>Play that exact song.</h3>
       <p>Not "play music" — "play kind of blue". It finds the actual track on Spotify and presses play, turns it down when you say so, skips when you say skip. Your hands never touch a keyboard.</p>
@@ -1417,7 +1352,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">12</div>
+    <div class="num">11</div>
     <div>
       <h3>It's in your pocket too.</h3>
       <p>Scan a QR code and your phone becomes another mouth and ear for the same Momzu — same memory, same Mac, same voice. Talk to your machine from the couch, the kitchen, the balcony.</p>
@@ -1438,7 +1373,7 @@ footer a:hover { color: var(--text); }
   </div>
 
   <div class="ability reveal">
-    <div class="num">13</div>
+    <div class="num">12</div>
     <div>
       <h3>It runs your Mac.</h3>
       <p>Opens apps, controls Spotify, sets the volume, checks what's eating your battery, keeps your objectives. Reminders don't just pop up — they speak, out loud, at the right moment.</p>
@@ -1464,8 +1399,8 @@ footer a:hover { color: var(--text); }
   <div class="spec reveal"><span class="sk">browser control</span><span class="sv">your real chrome — logins stay yours</span></div>
   <div class="spec reveal"><span class="sk">screen vision</span><span class="sv">on demand — looks only when you ask</span></div>
   <div class="spec reveal"><span class="sk">memory</span><span class="sv">plain files on your disk, open them anytime</span></div>
-  <div class="spec reveal"><span class="sk">hotkeys</span><span class="sv">hold space · ⌘⇧J system-wide</span></div>
-  <div class="spec reveal"><span class="sk">wake word</span><span class="sv good">"momzu" — hands-free, detected on device</span></div>
+  <div class="spec reveal"><span class="sk">hotkeys</span><span class="sv">hold space · ⌥space system-wide</span></div>
+  <div class="spec reveal"><span class="sk">acknowledgment</span><span class="sv good">soft chime the instant it hears you</span></div>
   <div class="spec reveal"><span class="sk">interrupt</span><span class="sv good">say "stop" — it stops. instantly, even mid-task</span></div>
   <div class="spec reveal"><span class="sk">while it's busy</span><span class="sv">keep talking — requests queue, nothing is lost</span></div>
   <div class="spec reveal"><span class="sk">calendar</span><span class="sv">google calendar — asked out loud, answered out loud</span></div>
@@ -1526,7 +1461,7 @@ footer a:hover { color: var(--text); }
     <ol>
       <li><b>open it</b> — drag momzu into applications. first launch: right-click → open → open (it's unsigned). allow the microphone. it downloads its ears once (~900 mb, one time).</li>
       <li><b>connect a mind</b> — momzu is the body; you pick the brain. using <b>claude</b> (recommended)? install <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude code</a> in terminal — <code>curl -fsSL https://claude.ai/install.sh | bash</code> — then run <code>claude</code> once and sign in with your claude account. otherwise press <b>keys</b> in momzu and paste a deepseek or gemini api key — or go fully offline with ollama.</li>
-      <li><b>talk</b> — hold space and speak. or switch on hands-free and just say "momzu" from across the room.</li>
+      <li><b>talk</b> — hold space and speak, or press ⌥space from anywhere. a soft chime means it got you.</li>
     </ol>
     <div class="ds-note">full manual: <a href="guide.txt" target="_blank">read me first</a></div>
   </div>
@@ -1665,8 +1600,8 @@ footer a:hover { color: var(--text); }
   document.querySelectorAll('.demo').forEach(el => dio.observe(el));
 
   /* ── ticker ─────────────────────────── */
-  const r1 = ['open ableton', "what's eating my battery?", "*momzu — what's on today?", 'remind me at nine to stretch', 'turn it down a little', "what's on my screen?", 'play kind of blue', 'switch to the local model', 'am i free thursday?', '*momzu — stop', 'how cold is it outside?'];
-  const r2 = ['*build me a landing page', "what's in my downloads?", 'brief me every morning at 8:30', 'find me flights to lisbon', 'read me that error', '*momzu — from the couch — skip this song', 'remember i hate mondays', 'dictate an email to sam', 'close everything except chrome', "who's using my wifi?"];
+  const r1 = ['open ableton', "what's eating my battery?", "*what's on today?", 'remind me at nine to stretch', 'turn it down a little', "what's on my screen?", 'play kind of blue', 'switch to the local model', 'am i free thursday?', '*wait, wait — stop', 'how cold is it outside?'];
+  const r2 = ['*build me a landing page', "what's in my downloads?", 'brief me every morning at 8:30', 'find me flights to lisbon', 'read me that error', '*from the couch — skip this song', 'remember i hate mondays', 'dictate an email to sam', 'close everything except chrome', "who's using my wifi?"];
   const fillRow = (id, arr) => {
     const el = document.getElementById(id);
     el.innerHTML = [...arr, ...arr].map(p => {
