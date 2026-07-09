@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="slit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9fb8c8"/>
+      <stop offset="1" stop-color="#5b7f96"/>
+    </linearGradient>
+    <radialGradient id="breathe" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.80" stop-color="#56bdff" stop-opacity="0"/>
+      <stop offset="0.90" stop-color="#56bdff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#56bdff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- full-bleed dark background, macOS squircle corners -->
+  <rect x="0" y="0" width="1024" height="1024" rx="232" fill="#050608"/>
+
+  <!-- soft breathing glow around the ring -->
+  <circle cx="512" cy="512" r="470" fill="url(#breathe)"/>
+
+  <!-- face disc + dim sleeping ring -->
+  <circle cx="512" cy="512" r="420" fill="#0b0d11"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#2c4a63" stroke-width="26"/>
+  <circle cx="512" cy="512" r="384" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="3"/>
+
+  <!-- closed eyes: thin tapered slits -->
+  <ellipse cx="400" cy="452" rx="78" ry="9" fill="url(#slit)"/>
+  <ellipse cx="624" cy="452" rx="78" ry="9" fill="url(#slit)"/>
+
+  <!-- flat deadpan mouth -->
+  <rect x="428" y="618" width="168" height="8" rx="4" fill="#dff8ff"/>
+</svg>

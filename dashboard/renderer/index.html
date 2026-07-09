@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>MOMZU</title>
+  <link rel="stylesheet" href="theme.css" />
+  <script type="importmap">
+    { "imports": { "three": "../../node_modules/three/build/three.module.js" } }
+  </script>
+</head>
+<body>
+  <div id="drag-strip"></div>
+
+  <header id="topbar">
+    <div class="brand">MOMZU</div>
+    <div class="topnav">• CORE &nbsp; SELF &nbsp; LIVE &nbsp; VOICE &nbsp; LOCAL</div>
+    <div class="top-right">
+      <button id="phone-btn" type="button" title="use Momzu from your phone" class="hidden">📱 PHONE</button>
+      <button id="voice-btn" type="button" title="choose the assistant's voice">♪ VOICE</button>
+      <button id="keys-btn" type="button" title="API keys / settings">⚙ KEYS</button>
+      <button id="dictate-btn" type="button" title="dictation mode (⌘⇧D)">DICTATE</button>
+      <button id="text-toggle" type="button" title="hide/show text">TEXT</button>
+      <div class="clock"><span id="clock-time">--:--</span><span id="clock-sec">:--</span></div>
+    </div>
+  </header>
+
+  <main id="grid">
+    <aside class="col left">
+      <section class="panel">
+        <h2>SYSTEM VITALS <span class="dot" id="conn-dot"></span></h2>
+        <div class="metric">
+          <div class="mrow"><label>CPU LOAD</label><span id="cpu-val" class="val">–</span></div>
+          <div class="bar"><div id="cpu-bar" class="fill"></div></div>
+        </div>
+        <div class="metric">
+          <div class="mrow"><label>MEMORY</label><span id="mem-val" class="val">–</span></div>
+          <div class="bar"><div id="mem-bar" class="fill"></div></div>
+        </div>
+        <div class="kv"><span>UPTIME</span><span id="uptime-val">–</span></div>
+        <div class="kv"><span>HOST</span><span id="host-val">–</span></div>
+        <div class="kv"><span>MODEL</span><span id="model-val">–</span></div>
+      </section>
+
+      <section class="panel grow">
+        <h2>OBJECTIVES</h2>
+        <ul id="objectives" class="checklist"></ul>
+        <form id="objective-form" class="add-row">
+          <input type="text" placeholder="+ add objective" autocomplete="off" />
+        </form>
+      </section>
+    </aside>
+
+    <section class="col center">
+      <div id="face"></div>
+      <div id="state-label">STANDBY</div>
+      <div id="chat-log"></div>
+      <form id="chat-form">
+        <select id="provider-select" title="AI provider"></select>
+        <select id="model-select" title="which model this provider runs"></select>
+        <input id="chat-input" type="text" placeholder="⌥Space to talk, or type…" autocomplete="off" />
+        <button id="mic-btn" type="button" title="⌥Space or ⌘⇧Space to talk (hold ⌃ with Accessibility granted)">◉</button>
+      </form>
+    </section>
+
+    <aside class="col right">
+      <section class="panel">
+        <h2>COMMAND DECK</h2>
+        <div id="command-deck" class="deck"></div>
+      </section>
+      <section class="panel grow">
+        <h2>REMINDERS</h2>
+        <ul id="reminders" class="checklist"></ul>
+        <form id="reminder-form" class="add-row">
+          <input type="text" placeholder="+ add reminder (…@18:30 or …+20m)" autocomplete="off" />
+        </form>
+      </section>
+      <section class="panel" style="max-height:280px">
+        <h2>MEMORY <span id="mem-stats" class="panel-stat"></span></h2>
+        <input id="memory-search" type="text" placeholder="search memories..." class="memory-search-input" />
+        <div id="memory-results" class="memory-results"></div>
+        <div id="memory-convos" class="memory-convos"></div>
+      </section>
+    </aside>
+  </main>
+
+  <footer id="ticker"><div id="ticker-track">MOMZU ONLINE — LOCAL VOICE READY — ALL SYSTEMS NOMINAL</div></footer>
+
+  <div id="voice-overlay" class="hidden">
+    <div id="voice-modal">
+      <div class="settings-head">
+        <h2>VOICE</h2>
+        <button id="voice-close" type="button">✕</button>
+      </div>
+      <div class="vrow">
+        <label>ENGINE</label>
+        <select id="voice-engine">
+          <option value="kokoro">Kokoro neural (natural, fast)</option>
+          <option value="say">System (instant, robotic)</option>
+        </select>
+      </div>
+      <div id="voice-kokoro-opts">
+        <div class="vrow">
+          <label>KOKORO VOICE</label>
+          <select id="voice-kokoro"></select>
+        </div>
+        <div id="voice-kokoro-note" class="settings-note"></div>
+      </div>
+      <div id="voice-say-opts">
+        <div class="vrow">
+          <label>ENGLISH VOICE</label>
+          <select id="voice-en"></select>
+        </div>
+        <div class="vrow">
+          <label>FRENCH VOICE</label>
+          <select id="voice-fr"></select>
+        </div>
+      </div>
+      <div class="vrow vactions">
+        <button id="voice-save" class="ksave" type="button">SAVE &amp; TEST</button>
+        <span id="voice-saved"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="phone-overlay" class="hidden">
+    <div id="phone-modal">
+      <div class="settings-head">
+        <h2>PHONE ACCESS</h2>
+        <button id="phone-close" type="button">✕</button>
+      </div>
+      <p class="settings-note">Scan with your phone camera — same Wi-Fi as this Mac.
+      You can chat and read answers from anywhere in the house; the mic stays on the Mac.</p>
+      <div id="phone-qr"></div>
+      <div id="phone-url"></div>
+      <div class="vrow vactions">
+        <button id="phone-copy" class="ksave" type="button">COPY LINK</button>
+        <span id="phone-copied"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-overlay" class="hidden">
+    <div id="settings-modal">
+      <div class="settings-head">
+        <h2>API KEYS</h2>
+        <button id="settings-close" type="button">✕</button>
+      </div>
+      <p class="settings-note">Paste one key per line — multiple keys are pooled and auto-rotated when one hits its rate limit. Stored locally in <code>config/state/keys.json</code>. Claude (subscription) needs no key.</p>
+      <div id="key-sections"></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

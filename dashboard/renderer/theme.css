@@ -1,0 +1,384 @@
+/* J.A.R.V.I.S. — V.A.U.L.T. dark theme. Re-skin by editing the variables. */
+:root {
+  --bg: #000000;
+  --panel: rgba(255, 255, 255, 0.015);
+  --border: rgba(255, 255, 255, 0.07);
+  --accent: #d4d8e0;   /* soft white */
+  --accent2: #838a97;  /* mid grey */
+  --text: #c4c8d0;
+  --dim: #52565f;
+  --danger: #e0817a;
+  --mono: "SF Mono", "Menlo", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  overflow: hidden;
+  user-select: none;
+}
+
+#drag-strip { position: fixed; top: 0; left: 0; right: 0; height: 28px; -webkit-app-region: drag; z-index: 50; }
+
+body {
+  display: grid;
+  grid-template-rows: 52px 1fr 34px;
+  background:
+    radial-gradient(900px 900px at 50% 52%, rgba(255,255,255,0.045), transparent 60%),
+    var(--bg);
+}
+
+/* ── top bar ─────────────────────────────── */
+#topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 22px 0 90px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.25em;
+}
+.brand { font-size: 15px; font-weight: 700; color: var(--accent); text-shadow: 0 0 12px rgba(255,255,255,.4); }
+.topnav { font-size: 10px; color: var(--dim); }
+.top-right { display: flex; align-items: center; gap: 16px; }
+.clock { font-size: 22px; font-weight: 600; color: var(--text); }
+.clock #clock-sec { font-size: 13px; color: var(--accent); }
+#text-toggle, #keys-btn, #voice-btn, #phone-btn {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--accent2); font-family: var(--mono); font-size: 9px; letter-spacing: 0.25em;
+  padding: 6px 10px; border-radius: 5px; cursor: pointer; -webkit-app-region: no-drag;
+}
+#phone-btn.hidden { display: none; }
+
+/* ── phone access modal ──────────────────── */
+#phone-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0.72); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+}
+#phone-overlay.hidden { display: none; }
+#phone-modal {
+  width: 380px; max-width: 92vw;
+  background: #0b0b0e; border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; -webkit-app-region: no-drag;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+#phone-modal .settings-head, #phone-modal .settings-note { width: 100%; }
+#phone-qr {
+  background: #ffffff; border-radius: 10px; padding: 14px;
+  width: 240px; height: 240px; display: flex; align-items: center; justify-content: center;
+}
+#phone-qr svg { width: 100%; height: 100%; display: block; }
+#phone-url {
+  font-size: 10px; color: var(--accent2); word-break: break-all; text-align: center;
+  user-select: text; -webkit-user-select: text; line-height: 1.6;
+}
+#dictate-btn {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--accent2); font-family: var(--mono); font-size: 9px; letter-spacing: 0.25em;
+  padding: 6px 10px; border-radius: 5px; cursor: pointer; -webkit-app-region: no-drag;
+}
+#dictate-btn.active { color: #4ade80; border-color: #4ade80; box-shadow: 0 0 12px rgba(74,222,128,0.4); }
+#text-toggle.off { color: var(--dim); border-color: rgba(255,255,255,0.08); }
+#keys-btn.has-missing { color: var(--accent); border-color: rgba(255,255,255,0.2); }
+
+/* ── settings / API keys modal ───────────── */
+#settings-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0.72); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+}
+#settings-overlay.hidden { display: none; }
+#settings-modal {
+  width: 560px; max-width: 90vw; max-height: 84vh; overflow-y: auto;
+  background: #0b0b0e; border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; -webkit-app-region: no-drag;
+}
+.settings-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.settings-head h2 { font-size: 13px; letter-spacing: 0.3em; color: var(--accent); }
+#settings-close { background: none; border: none; color: var(--dim); font-size: 16px; cursor: pointer; }
+#settings-close:hover { color: var(--text); }
+.settings-note { font-size: 10px; color: var(--dim); line-height: 1.6; margin-bottom: 20px; }
+.settings-note code { color: var(--accent2); }
+.key-section { margin-bottom: 20px; }
+.key-section .krow { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.key-section label { font-size: 11px; letter-spacing: 0.2em; color: var(--text); }
+.key-section .kstat { font-size: 10px; }
+.kstat.set { color: #6ee7a8; }
+.kstat.unset { color: var(--danger); }
+.key-section textarea {
+  width: 100%; height: 62px; resize: vertical;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); font-family: var(--mono); font-size: 11px; padding: 8px; outline: none;
+}
+.key-section textarea:focus { border-color: var(--accent); }
+.key-section .khint { font-size: 9px; color: var(--dim); margin-top: 4px; }
+.key-section .ksave {
+  margin-top: 8px; background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em;
+  padding: 7px 16px; border-radius: 5px; cursor: pointer;
+}
+.key-section .ksave:hover { background: rgba(255,255,255,0.12); border-color: var(--accent); }
+.key-section .ksaved { color: #6ee7a8; font-size: 10px; margin-left: 10px; }
+
+/* voice-only mode: no chat text, just the sphere and your voice */
+body.voice-only #chat-log { display: none; }
+body.voice-only #chat-form { opacity: 0.25; transition: opacity 0.3s; }
+body.voice-only #chat-form:hover, body.voice-only #chat-form:focus-within { opacity: 1; }
+
+/* ── layout ──────────────────────────────── */
+#grid {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  gap: 14px;
+  padding: 14px 16px;
+  min-height: 0;
+}
+.col { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+/* seamless center — the black hole floats in the page, no frame */
+.col.center { position: relative; overflow: hidden; background: transparent; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  /* no backdrop-filter: the background behind panels is static, so blur was
+     invisible but cost GPU time on every composite */
+  display: flex; flex-direction: column; min-height: 0;
+}
+.panel.grow { flex: 1; }
+.panel h2 {
+  font-size: 10px; letter-spacing: 0.3em; color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px; margin-bottom: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 8px currentColor; }
+.dot.on { background: #4ade80; }
+
+/* ── metrics ─────────────────────────────── */
+.metric { margin-bottom: 12px; font-size: 10px; }
+.metric .mrow { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 5px; }
+.metric label { color: var(--dim); letter-spacing: 0.15em; white-space: nowrap; }
+.bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width 0.8s ease; box-shadow: 0 0 8px var(--accent); }
+.val { color: var(--accent2); font-size: 10px; white-space: nowrap; }
+.kv {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+  font-size: 10px; color: var(--dim); padding: 4px 0; line-height: 1.5;
+}
+.kv span:first-child { white-space: nowrap; letter-spacing: 0.15em; flex-shrink: 0; }
+.kv span:last-child { color: var(--text); text-align: right; word-break: break-word; min-width: 0; }
+
+/* ── checklists ──────────────────────────── */
+.checklist { list-style: none; overflow-y: auto; flex: 1; font-size: 11px; }
+.checklist li { display: flex; gap: 8px; padding: 6px 2px; cursor: pointer; align-items: baseline; border-bottom: 1px dotted rgba(255,255,255,0.05); }
+.checklist li .box { color: var(--accent); }
+.checklist li.done { color: var(--dim); text-decoration: line-through; }
+.checklist li .del { margin-left: auto; color: var(--dim); opacity: 0; font-size: 10px; }
+.checklist li:hover .del { opacity: 1; }
+.add-row input {
+  width: 100%; background: transparent; border: none; border-top: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono); font-size: 11px; padding: 8px 2px; outline: none;
+}
+
+/* ── command deck ────────────────────────── */
+.deck { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.deck button {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+  padding: 12px 4px; border-radius: 6px; cursor: pointer;
+  transition: all 0.15s;
+}
+.deck button:hover { background: rgba(255,255,255,0.10); border-color: var(--accent); box-shadow: 0 0 12px rgba(255,255,255,0.18); }
+.deck button:active { transform: scale(0.96); }
+
+/* ── center: face + chat ─────────────────── */
+#face {
+  position: absolute;
+  inset: 40px 0 32%;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+#state-label {
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; letter-spacing: 0.5em; color: var(--dim);
+}
+#state-label.active { color: var(--accent2); text-shadow: 0 0 10px currentColor; }
+
+#chat-log {
+  position: absolute; left: 16px; right: 16px; bottom: 62px;
+  max-height: 46%; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 8px;
+  font-size: 12px; line-height: 1.5;
+  mask-image: linear-gradient(to bottom, transparent, black 12%);
+  user-select: text;
+}
+.msg { padding: 8px 12px; border-radius: 8px; max-width: 82%; white-space: pre-wrap; word-wrap: break-word; }
+.msg.user { align-self: flex-end; background: rgba(159,178,204,0.10); border: 1px solid rgba(159,178,204,0.22); color: var(--accent2); }
+.msg.jarvis { align-self: flex-start; background: rgba(14,14,16,0.85); border: 1px solid var(--border); }
+.msg.error { align-self: center; color: var(--danger); border: 1px solid rgba(248,113,113,0.3); background: rgba(248,113,113,0.06); font-size: 11px; }
+.msg.action { align-self: center; color: var(--accent2); border: 1px solid rgba(159,178,204,0.22); background: rgba(159,178,204,0.05); font-size: 10px; letter-spacing: 0.05em; font-family: var(--mono); }
+.msg.result { align-self: flex-start; color: var(--dim); border: 1px solid var(--border); background: rgba(12,12,14,0.6); font-size: 10px; font-family: var(--mono); white-space: pre-wrap; max-width: 100%; }
+.msg.dictate { align-self: center; color: #4ade80; border: 1px solid rgba(74,222,128,0.3); background: rgba(74,222,128,0.06); font-size: 10px; }
+
+#chat-form {
+  position: absolute; left: 16px; right: 16px; bottom: 14px;
+  display: flex; gap: 8px;
+}
+#provider-select, #model-select {
+  background: rgba(14,14,16,0.9); color: var(--accent); border: 1px solid var(--border);
+  border-radius: 6px; font-family: var(--mono); font-size: 10px; padding: 0 6px; outline: none;
+}
+#model-select { color: var(--accent2); max-width: 130px; }
+#chat-input {
+  flex: 1; background: rgba(14,14,16,0.9); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text); font-family: var(--mono); font-size: 12px;
+  padding: 10px 14px; outline: none;
+}
+#chat-input:focus { border-color: var(--accent); box-shadow: 0 0 14px rgba(255,255,255,0.16); }
+#mic-btn {
+  width: 42px; background: rgba(14,14,16,0.9); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--dim); font-size: 16px; cursor: pointer;
+}
+#mic-btn.recording { color: var(--danger); border-color: var(--danger); box-shadow: 0 0 16px rgba(248,113,113,0.5); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 4px rgba(248,113,113,0.2); } }
+
+/* ── ticker ──────────────────────────────── */
+#ticker {
+  border-top: 1px solid var(--border);
+  overflow: hidden; display: flex; align-items: center;
+  font-size: 10px; letter-spacing: 0.15em; color: var(--dim);
+}
+#ticker-track { white-space: nowrap; padding-left: 100%; animation: scroll 40s linear infinite; }
+@keyframes scroll { to { transform: translateX(-100%); } }
+
+/* ── GPU idle: stop animating when nothing is watching ── */
+/* face asleep → the ticker stops scrolling (it resumes on any wake) */
+body.asleep #ticker-track { animation-play-state: paused; }
+/* window hidden (mini widget mode) → freeze every CSS animation; rAF loops
+   like the mic silence detector are unaffected by animation-play-state */
+html.win-hidden *,
+html.win-hidden *::before,
+html.win-hidden *::after { animation-play-state: paused !important; }
+
+::-webkit-scrollbar { width: 4px; }
+.panel-stat { font-size: 9px; color: var(--dim); font-weight: normal; letter-spacing: 0; }
+.memory-search-input {
+  width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono); font-size: 10px; padding: 6px 8px; border-radius: 4px; outline: none;
+  margin-bottom: 6px;
+}
+.memory-search-input:focus { border-color: var(--accent); }
+.memory-results { overflow-y: auto; flex: 1; font-size: 10px; max-height: 120px; }
+.memory-result { padding: 4px 0; border-bottom: 1px dotted rgba(255,255,255,0.05); }
+.memory-result .ts { color: var(--dim); font-size: 9px; margin-right: 6px; }
+
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ── memory conversations browser ────────── */
+.memory-convos { overflow-y: auto; flex: 1; font-size: 10px; }
+.memory-convo {
+  padding: 5px 2px; cursor: pointer; border-bottom: 1px dotted rgba(255,255,255,0.05);
+  color: var(--text);
+}
+.memory-convo:hover { color: var(--accent); }
+.memory-convo .ts { color: var(--dim); font-size: 9px; margin-right: 6px; }
+.memory-convo.back { color: var(--accent2); }
+.memory-turn { padding: 4px 0; border-bottom: 1px dotted rgba(255,255,255,0.05); line-height: 1.4; }
+.memory-turn b { color: var(--accent2); font-weight: 600; }
+.memory-turn.user b { color: var(--accent); }
+.dim { color: var(--dim); font-size: 10px; padding: 4px 0; }
+
+/* ── timed reminder chips ────────────────── */
+.checklist .due {
+  margin-left: 6px; font-size: 9px; color: var(--accent2);
+  border: 1px solid var(--border); border-radius: 3px; padding: 1px 4px; white-space: nowrap;
+}
+.checklist .due.fired { color: var(--dim); border-style: dotted; }
+
+/* ── voice picker modal ──────────────────── */
+#voice-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 40;
+  display: flex; align-items: center; justify-content: center;
+}
+#voice-overlay.hidden { display: none; }
+#voice-modal {
+  width: 420px; max-width: 90vw; background: #0c0b12; border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+#voice-modal .vrow { display: flex; flex-direction: column; gap: 5px; margin: 12px 0; }
+#voice-modal .vrow label {
+  font-size: 9px; letter-spacing: 0.25em; color: var(--accent2); font-family: var(--mono);
+}
+#voice-modal select {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text);
+  font-family: var(--mono); font-size: 11px; padding: 7px 8px; border-radius: 5px; outline: none;
+}
+#voice-modal select:focus { border-color: var(--accent); }
+#voice-modal .vactions { flex-direction: row; align-items: center; gap: 10px; }
+#voice-modal #voice-saved { font-size: 10px; color: var(--accent2); }
+#voice-say-opts.hidden { display: none; }
+#voice-kokoro-opts.hidden { display: none; }
+#model-select.hidden { display: none; }
+
+/* ── phone layout (dashboard served over the LAN) ─────────────────────── */
+/* The phone is a REMOTE CONTROL: face + big mic + input + command deck.
+   Vitals/objectives/reminders/memory are desktop furniture — hidden here.
+   (index.html carries the viewport meta; without it none of this applies.) */
+@media (max-width: 700px) {
+  /* The desktop shell is a fixed one-screen grid (52px topbar / 1fr / 34px
+     ticker, overflow hidden). A phone's content is TALLER than its screen —
+     let the page grow and scroll, or the deck's bottom rows are unreachable. */
+  html, body { height: auto; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
+  body { grid-template-rows: auto auto auto; }
+  #ticker {
+    position: sticky; bottom: 0; z-index: 30;
+    background: var(--bg); min-height: 34px;
+  }
+  /* minmax(0,…) + min-width:0: grid/flex items otherwise refuse to shrink
+     below their content (the nowrap ticker line) and push the layout wide. */
+  #grid { grid-template-columns: minmax(0, 1fr); padding: 8px; gap: 10px; padding-bottom: 48px; }
+  #grid .col, .col.center > * { min-width: 0; }
+  /* Desktop topbar reserves 90px for the Mac traffic lights + a clock —
+     both overflow a phone and force sideways scroll (the "clipped face"). */
+  #topbar { padding: 0 10px; flex-wrap: wrap; }
+  #topbar .top-right { flex-wrap: wrap; justify-content: flex-end; }
+  #topbar .clock { display: none; }
+  /* The face is sized in vh for desktop; cap it by width on phones. */
+  #face-root, #face-glow {
+    width: min(76vw, 42vh) !important;
+    height: min(76vw, 42vh) !important;
+  }
+  .col.left { display: none; }
+  /* Keep only the command deck from the right column — one-tap commands. */
+  .col.right .panel { display: none; }
+  .col.right .panel:first-child { display: block; flex: none; }
+  .deck button { min-height: 48px; font-size: 12px; }
+  #topbar .topnav { display: none; }
+  #topbar .top-right { gap: 6px; }
+  /* Desktop-only chrome: phone button (you're already on it), dictation. */
+  #phone-btn, #dictate-btn { display: none !important; }
+
+  /* The center column is the app: face on top, then chat, then composer. */
+  .col.center { min-height: 72vh; }
+  #face { inset: 30px 0 45%; }
+  #chat-log { max-height: 30vh; }
+
+  /* Composer: full-width input + a big round mic you can actually hit. */
+  #chat-form { flex-wrap: wrap; left: 8px; right: 8px; bottom: 8px; gap: 8px; }
+  #provider-select, #model-select { display: none; } /* phone uses current brain */
+  #chat-input {
+    min-width: 0; flex: 1; font-size: 16px; /* 16px stops mobile auto-zoom */
+    min-height: 46px; padding: 10px 14px;
+  }
+  #mic-btn {
+    width: 54px; height: 54px; border-radius: 50%; font-size: 20px;
+    flex: none;
+  }
+}

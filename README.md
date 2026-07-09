@@ -42,6 +42,10 @@ The full manual is in [GUIDE.md](GUIDE.md) — read it once, it answers everythi
 
 Momzu is free. If it helped you, you can [buy me a coffee](https://buymeacoffee.com/wissamsader) ☕
 
----
+## Open source
 
-*Momzu is currently distributed as a free app; the source code is not public at this time.*
+Momzu is open source under the [MIT license](LICENSE) — this repo holds the
+full app source, the website, and the releases. Nothing personal ever lands
+here: all keys, memory, and settings live only in a gitignored local state
+folder on your Mac. Want to run it from source, audit it, or hack on it?
+Start at [DEVELOPING.md](DEVELOPING.md).

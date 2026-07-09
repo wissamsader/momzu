@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: transparent;
+    display: grid;
+    place-items: center;
+    width: 160px;
+    height: 180px;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  body.dragging { cursor: grabbing; }
+
+  /* ── face ring ─────────────────────────── */
+  #face-root {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+    background: #08090d;
+    border: 3.5px solid rgba(86, 189, 255, 0.82);
+    overflow: hidden;
+    transition: border-color 300ms ease, box-shadow 300ms ease;
+  }
+  #face-root::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+  }
+
+  /* ── eyes ──────────────────────────────── */
+  .eye-row {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 20px;
+    transform: translateY(-13px);
+    animation: mini-eye-look 6.5s infinite ease-in-out;
+  }
+  .eye {
+    position: relative;
+    width: 22px;
+    height: 26px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #f8fbff, #88e9ff);
+    animation: mini-blink 4.6s infinite;
+    overflow: hidden;
+    transition: transform 250ms ease, background 300ms ease;
+  }
+  .eye span {
+    position: absolute;
+    inset: 24% 30% 32%;
+    border-radius: 999px;
+    background: #071019;
+    opacity: 0.82;
+    animation: mini-pupil 6.5s infinite ease-in-out;
+  }
+
+  /* ── mouth ─────────────────────────────── */
+  .mouth-wrap {
+    position: absolute;
+    z-index: 2;
+    bottom: 22%;
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 34px;
+  }
+  .mouth {
+    position: relative;
+    width: calc(28px + (var(--mw) * 28px) - (var(--mr) * 10px));
+    height: calc(2px + (var(--mo) * 14px));
+    transform-origin: center;
+    transition: width 55ms linear, height 55ms linear, transform 55ms linear;
+    transform: translateY(calc(var(--mo) * -2px)) scaleX(calc(1 - (var(--mr) * 0.28)));
+  }
+  .mouth-line {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: calc(999px - (var(--mr) * 400px));
+    background: #dff8ff;
+    transform: scaleY(calc(0.35 + (var(--mo) * 0.9)));
+  }
+
+  /* ── mood states ───────────────────────── */
+  #face-root.face-thinking .eye,
+  #face-root.face-working .eye { transform: scaleY(0.72); }
+
+  #face-root.face-error { border-color: rgba(255, 91, 114, 0.82); }
+  #face-root.face-error .eye { background: linear-gradient(180deg, #fff5f7, #ff5b72); }
+
+  #face-root.face-listening { border-color: rgba(89, 239, 161, 0.75); }
+
+  #face-root.face-speaking .mouth {
+    width: calc(30px + (var(--mw) * 32px) - (var(--mr) * 13px));
+    height: calc(2px + (var(--mo) * 17px));
+  }
+
+  /* ── glow pulse when active ────────────── */
+  #face-root.face-listening,
+  #face-root.face-speaking { box-shadow: 0 0 18px rgba(89, 239, 161, 0.22); }
+  #face-root.face-thinking,
+  #face-root.face-working { box-shadow: 0 0 14px rgba(86, 189, 255, 0.18); }
+  #face-root.face-error { box-shadow: 0 0 16px rgba(255, 91, 114, 0.2); }
+
+  /* ── status dot below face ─────────────── */
+  #status-dot {
+    position: absolute;
+    bottom: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.25);
+    transition: background 300ms ease;
+  }
+  #status-dot.on { background: rgba(89, 239, 161, 0.75); }
+  #status-dot.off { background: rgba(255, 91, 114, 0.6); }
+
+  /* sleeping: eyes closed, no motion, slow breathing glow.
+     Glow is a sibling layer animating opacity only — animating box-shadow
+     on #face-root repaints the whole widget every frame (GPU). */
+  #face-root.face-sleeping { border-color: rgba(86, 189, 255, 0.28); }
+  #face-glow {
+    position: fixed; inset: 0; margin: auto;
+    width: 120px; height: 120px;
+    border-radius: 999px;
+    box-shadow: 0 0 14px rgba(86, 189, 255, 0.18);
+    opacity: 0;
+    pointer-events: none;
+  }
+  #face-root.face-sleeping + #face-glow { animation: mini-breathe 5s ease-in-out infinite; }
+  #face-root.face-sleeping .eye-row { animation: none; }
+  #face-root.face-sleeping .eye {
+    animation: none;
+    transform: scaleY(0.07);
+    background: linear-gradient(180deg, #9fb8c8, #5b7f96);
+  }
+  #face-root.face-sleeping .eye span { animation: none; opacity: 0; }
+  @keyframes mini-breathe {
+    0%, 100% { opacity: 0.28; }
+    50% { opacity: 1; }
+  }
+
+  /* ── keyframes ─────────────────────────── */
+  @keyframes mini-blink {
+    0%, 88%, 92%, 100% { transform: scaleY(1); }
+    89.5%, 93.5% { transform: scaleY(0.08); }
+  }
+  @keyframes mini-eye-look {
+    0%, 12%, 100% { transform: translate(0, -13px); }
+    24%, 36% { transform: translate(5px, -14px); }
+    50%, 62% { transform: translate(-6px, -12px); }
+    76% { transform: translate(2px, -14px); }
+  }
+  @keyframes mini-pupil {
+    0%, 12%, 100% { transform: translate(0, 0); }
+    24%, 36% { transform: translate(3px, -1px); }
+    50%, 62% { transform: translate(-3px, 1px); }
+    76% { transform: translate(1px, -2px); }
+  }
+</style>
+</head>
+<body>
+
+<div id="face-root" class="face-idle">
+  <div class="eye-row">
+    <div class="eye"><span></span></div>
+    <div class="eye"><span></span></div>
+  </div>
+  <div class="mouth-wrap">
+    <div class="mouth">
+      <div class="mouth-line"></div>
+    </div>
+  </div>
+</div>
+<div id="face-glow"></div>
+<div id="status-dot"></div>
+
+<script>
+  (function () {
+    const root = document.getElementById('face-root');
+    const dot = document.getElementById('status-dot');
+
+    // ── mouth control ──────────────────────
+    let mo = 0, mw = 0.18, mr = 0;
+    function applyMouth() {
+      root.style.setProperty('--mo', mo.toFixed(3));
+      root.style.setProperty('--mw', mw.toFixed(3));
+      root.style.setProperty('--mr', mr.toFixed(3));
+    }
+    applyMouth();
+
+    function silentMouth() { mo = 0; mw = 0.18; mr = 0; applyMouth(); }
+
+    // ── state ──────────────────────────────
+    // Sleeps (eyes closed) after a short idle spell; anything waking the
+    // face — listening, thinking, speaking — cancels the nap instantly.
+    let currentState = 'idle';
+    let sleepTimer = null;
+    let busyTurn = false; // server mid-turn: face must stay awake/thinking
+    function isAsleep() { return root.className === 'face-sleeping'; }
+    function setState(state) {
+      if (sleepTimer) { clearTimeout(sleepTimer); sleepTimer = null; }
+      currentState = state;
+      root.className = 'face-' + state;
+      if (state !== 'speaking') silentMouth();
+      if (state === 'idle') {
+        sleepTimer = setTimeout(function () {
+          root.className = 'face-sleeping';
+        }, 8000);
+      }
+    }
+
+    // ── WebSocket ──────────────────────────
+    let ws = null;
+    let audioCtx = null;
+    let speaking = false;
+    let currentSrc = null;
+    const speechQueue = [];
+
+    function connect() {
+      ws = new WebSocket('ws://127.0.0.1:8765');
+      ws.onopen = () => dot.classList.add('on');
+      ws.onclose = () => {
+        dot.classList.add('off');
+        dot.classList.remove('on');
+        setState('idle');
+        setTimeout(connect, 2000);
+      };
+      ws.onerror = () => ws.close();
+
+      ws.onmessage = function (event) {
+        var msg = JSON.parse(event.data);
+        switch (msg.type) {
+          case 'init':
+            busyTurn = !!msg.busy;
+            setState(busyTurn ? 'thinking' : 'idle'); // reconnected mid-turn
+            break;
+          case 'busy':
+            // Server-side truth about a turn in flight — while on, the face
+            // stays awake so the user can see Momzu is doing something.
+            busyTurn = !!msg.on;
+            if (busyTurn) { if (isAsleep()) setState('thinking'); }
+            else if (!speaking && !isAsleep()) setState('idle');
+            break;
+          case 'transcribing':
+            setState('thinking'); // matches the main window: mic is done, processing
+            break;
+          case 'thinking':
+            stopPlayback(); // new turn — cut off leftover speech (barge-in)
+            setState('thinking');
+            break;
+          case 'acting':
+            setState('working');
+            break;
+          case 'token':
+            break; // tokens stream fast — face stays in speaking state
+          case 'done':
+            // A sleeping face must not blink open for empty dones. Mid-turn,
+            // they return to thinking, not idle; 'busy: off' does the reset.
+            if (busyTurn) { if (!speaking && !isAsleep()) setState('thinking'); }
+            else if (!speaking && !isAsleep()) setState('idle');
+            break;
+          case 'chime':
+            playChime(msg.kind);
+            break;
+          case 'halt':
+            // Voice stop accepted server-side: cut playback, wind down.
+            busyTurn = false;
+            stopPlayback();
+            setState('idle');
+            playChime('stop');
+            break;
+          case 'error':
+            setState('error');
+            setTimeout(function () { setState(busyTurn ? 'thinking' : 'idle'); }, 2500);
+            break;
+          case 'cleared':
+            setState('idle');
+            break;
+          case 'speak-state':
+            break;
+          case 'speech':
+            playSpeech(msg.data);
+            break;
+          case 'ui-state':
+            // Mic state mirrored from the main renderer — the face goes
+            // green the moment recording starts, even in the widget.
+            if (msg.state === 'listening') stopPlayback(); // barge-in
+            if (!speaking) setState(msg.state);
+            break;
+        }
+      };
+    }
+
+    // Earcons — same tones as the main window (see app.js playChime):
+    // rising pair = request heard, falling pair = stop accepted.
+    var lastChimeAt = 0;
+    function playChime(kind) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        var gap = Math.max(0, lastChimeAt + 0.35 - audioCtx.currentTime);
+        var t0 = audioCtx.currentTime + gap;
+        lastChimeAt = t0;
+        var freqs = kind === 'stop' ? [659, 440] : [880, 1318];
+        freqs.forEach(function (f, i) {
+          var o = audioCtx.createOscillator();
+          var g = audioCtx.createGain();
+          o.type = 'sine';
+          o.frequency.value = f;
+          var t = t0 + i * 0.09;
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.exponentialRampToValueAtTime(0.12, t + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(t); o.stop(t + 0.22);
+        });
+      } catch (e) { /* audio not ready — best-effort */ }
+    }
+
+    // ── speech playback ────────────────────
+    function playSpeech(b64) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        var bytes = Uint8Array.from(atob(b64), function (c) { return c.charCodeAt(0); });
+        audioCtx.decodeAudioData(bytes.buffer, function (buffer) {
+          speechQueue.push(buffer);
+          playNext();
+        });
+      } catch (e) { /* skip */ }
+    }
+
+    var mouthTimer = null;
+    var reportedPlaying = false;
+
+    // Tell the orchestrator when our voice is actually on the speakers —
+    // its echo suppression keys off this signal.
+    function reportSpeech(playing) {
+      if (reportedPlaying === playing) return;
+      reportedPlaying = playing;
+      try {
+        if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'speech-state', playing: playing }));
+      } catch (e) { /* best-effort */ }
+    }
+
+    function stopPlayback() {
+      speechQueue.length = 0;
+      if (currentSrc) { try { currentSrc.stop(); } catch (e) {} currentSrc = null; }
+      if (mouthTimer) { clearInterval(mouthTimer); mouthTimer = null; }
+      speaking = false;
+      reportSpeech(false);
+      silentMouth();
+    }
+
+    function playNext() {
+      if (speaking) return;
+      var buffer = speechQueue.shift();
+      if (!buffer) { reportSpeech(false); setState('idle'); return; }
+      speaking = true;
+      reportSpeech(true);
+      setState('speaking');
+      // Simple mouth animation while speaking (no audio analysis in mini).
+      mouthTimer = setInterval(function () {
+        mo = 0.15 + Math.random() * 0.55;
+        mw = 0.25 + Math.random() * 0.6;
+        applyMouth();
+      }, 55);
+      var src = audioCtx.createBufferSource();
+      src.buffer = buffer;
+      src.connect(audioCtx.destination);
+      src.onended = function () {
+        if (mouthTimer) { clearInterval(mouthTimer); mouthTimer = null; }
+        silentMouth();
+        currentSrc = null;
+        speaking = false;
+        playNext();
+      };
+      currentSrc = src;
+      src.start();
+    }
+
+    // ── drag anywhere / click to talk / double-click to open ──────────
+    // Manual pointer drag (no -webkit-app-region): the whole widget is
+    // grabbable, and clicks still work. Movement under 5px counts as a
+    // click: single click = push-to-talk, double click = open main window.
+    var pointerActive = false, dragged = false;
+    var startX = 0, startY = 0;
+    var clickTimer = null;
+
+    document.body.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      pointerActive = true;
+      dragged = false;
+      startX = e.screenX;
+      startY = e.screenY;
+      document.body.setPointerCapture(e.pointerId);
+      if (window.jarvis && window.jarvis.miniDragStart) window.jarvis.miniDragStart();
+    });
+
+    document.body.addEventListener('pointermove', function (e) {
+      if (!pointerActive) return;
+      var dx = e.screenX - startX;
+      var dy = e.screenY - startY;
+      // Glitched pointer frames (NaN/absurd screen coords) must never reach
+      // the main process — they used to crash the app via setPosition.
+      if (!isFinite(dx) || !isFinite(dy) || Math.abs(dx) > 20000 || Math.abs(dy) > 20000) return;
+      if (!dragged && Math.abs(dx) + Math.abs(dy) > 5) {
+        dragged = true;
+        document.body.classList.add('dragging');
+      }
+      if (dragged && window.jarvis && window.jarvis.miniDrag) window.jarvis.miniDrag(dx, dy);
+    });
+
+    document.body.addEventListener('pointerup', function () {
+      if (!pointerActive) return;
+      pointerActive = false;
+      document.body.classList.remove('dragging');
+      if (window.jarvis && window.jarvis.miniDragEnd) window.jarvis.miniDragEnd();
+      if (dragged) { dragged = false; return; }
+
+      if (clickTimer) {
+        // second click within the window → open the main app
+        clearTimeout(clickTimer);
+        clickTimer = null;
+        if (window.jarvis && window.jarvis.restoreMain) window.jarvis.restoreMain();
+      } else {
+        clickTimer = setTimeout(function () {
+          clickTimer = null;
+          // single click → walkie-talkie: toggle push-to-talk
+          if (window.jarvis && window.jarvis.togglePTT) window.jarvis.togglePTT();
+        }, 280);
+      }
+    });
+
+    // ── hover hint ─────────────────────────
+    document.body.addEventListener('mouseenter', function () {
+      root.style.borderColor = 'rgba(255,255,255,0.55)';
+    });
+    document.body.addEventListener('mouseleave', function () {
+      root.style.borderColor = ''; // back to the mood color from the class
+    });
+
+    connect();
+  })();
+</script>
+</body>
+</html>

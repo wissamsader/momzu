@@ -1,0 +1,431 @@
+{
+  "defaultProvider": "claude-agent",
+  "port": 8765,
+  "systemPrompt": "You are Momzu, a personal voice assistant living on this Mac. Be concise — answers are spoken aloud, so keep them short and conversational unless asked for detail. Never use markdown formatting. Reply in the language the user speaks, but never write Arabic script — the voice engine cannot speak it (if a transcript arrives in Arabic script, it may also be phonetically-garbled English; interpret it generously and answer in English).",
+  "providers": {
+    "claude-agent": {
+      "label": "Claude (agent)",
+      "choice": "sonnet-high",
+      "model": "sonnet",
+      "effort": "high",
+      "models": [
+        {
+          "id": "sonnet-low",
+          "model": "sonnet",
+          "effort": "low",
+          "label": "Sonnet 5 · low effort (fastest)"
+        },
+        {
+          "id": "sonnet-medium",
+          "model": "sonnet",
+          "effort": "medium",
+          "label": "Sonnet 5 · medium effort"
+        },
+        {
+          "id": "sonnet-high",
+          "model": "sonnet",
+          "effort": "high",
+          "label": "Sonnet 5 · high effort"
+        },
+        {
+          "id": "sonnet-xhigh",
+          "model": "sonnet",
+          "effort": "xhigh",
+          "label": "Sonnet 5 · xhigh effort (deepest)"
+        },
+        {
+          "id": "opus-low",
+          "model": "opus",
+          "effort": "low",
+          "label": "Opus 4.8 · low effort (fastest)"
+        },
+        {
+          "id": "opus-medium",
+          "model": "opus",
+          "effort": "medium",
+          "label": "Opus 4.8 · medium effort"
+        },
+        {
+          "id": "opus-high",
+          "model": "opus",
+          "effort": "high",
+          "label": "Opus 4.8 · high effort"
+        },
+        {
+          "id": "opus-xhigh",
+          "model": "opus",
+          "effort": "xhigh",
+          "label": "Opus 4.8 · xhigh effort (deepest)"
+        },
+        {
+          "id": "fable-low",
+          "model": "claude-fable-5",
+          "effort": "low",
+          "label": "Fable 5 · low effort (fastest)"
+        },
+        {
+          "id": "fable-medium",
+          "model": "claude-fable-5",
+          "effort": "medium",
+          "label": "Fable 5 · medium effort"
+        },
+        {
+          "id": "fable-high",
+          "model": "claude-fable-5",
+          "effort": "high",
+          "label": "Fable 5 · high effort"
+        },
+        {
+          "id": "fable-xhigh",
+          "model": "claude-fable-5",
+          "effort": "xhigh",
+          "label": "Fable 5 · xhigh effort (deepest)"
+        },
+        {
+          "id": "haiku",
+          "model": "haiku",
+          "label": "Haiku 4.5 (fastest — no effort setting)"
+        }
+      ]
+    },
+    "claude-cli": {
+      "label": "Claude (basic)",
+      "choice": "sonnet-high",
+      "model": "sonnet",
+      "effort": "high",
+      "models": [
+        {
+          "id": "sonnet-low",
+          "model": "sonnet",
+          "effort": "low",
+          "label": "Sonnet 5 · low effort (fastest)"
+        },
+        {
+          "id": "sonnet-medium",
+          "model": "sonnet",
+          "effort": "medium",
+          "label": "Sonnet 5 · medium effort"
+        },
+        {
+          "id": "sonnet-high",
+          "model": "sonnet",
+          "effort": "high",
+          "label": "Sonnet 5 · high effort"
+        },
+        {
+          "id": "sonnet-xhigh",
+          "model": "sonnet",
+          "effort": "xhigh",
+          "label": "Sonnet 5 · xhigh effort (deepest)"
+        },
+        {
+          "id": "opus-low",
+          "model": "opus",
+          "effort": "low",
+          "label": "Opus 4.8 · low effort (fastest)"
+        },
+        {
+          "id": "opus-medium",
+          "model": "opus",
+          "effort": "medium",
+          "label": "Opus 4.8 · medium effort"
+        },
+        {
+          "id": "opus-high",
+          "model": "opus",
+          "effort": "high",
+          "label": "Opus 4.8 · high effort"
+        },
+        {
+          "id": "opus-xhigh",
+          "model": "opus",
+          "effort": "xhigh",
+          "label": "Opus 4.8 · xhigh effort (deepest)"
+        },
+        {
+          "id": "fable-low",
+          "model": "claude-fable-5",
+          "effort": "low",
+          "label": "Fable 5 · low effort (fastest)"
+        },
+        {
+          "id": "fable-medium",
+          "model": "claude-fable-5",
+          "effort": "medium",
+          "label": "Fable 5 · medium effort"
+        },
+        {
+          "id": "fable-high",
+          "model": "claude-fable-5",
+          "effort": "high",
+          "label": "Fable 5 · high effort"
+        },
+        {
+          "id": "fable-xhigh",
+          "model": "claude-fable-5",
+          "effort": "xhigh",
+          "label": "Fable 5 · xhigh effort (deepest)"
+        },
+        {
+          "id": "haiku",
+          "model": "haiku",
+          "label": "Haiku 4.5 (fastest — no effort setting)"
+        }
+      ]
+    },
+    "anthropic": {
+      "label": "Claude (API)",
+      "choice": "sonnet-high",
+      "model": "claude-sonnet-5",
+      "effort": "high",
+      "models": [
+        {
+          "id": "sonnet-low",
+          "model": "claude-sonnet-5",
+          "effort": "low",
+          "label": "Sonnet 5 · low effort (fastest)"
+        },
+        {
+          "id": "sonnet-medium",
+          "model": "claude-sonnet-5",
+          "effort": "medium",
+          "label": "Sonnet 5 · medium effort"
+        },
+        {
+          "id": "sonnet-high",
+          "model": "claude-sonnet-5",
+          "effort": "high",
+          "label": "Sonnet 5 · high effort"
+        },
+        {
+          "id": "sonnet-xhigh",
+          "model": "claude-sonnet-5",
+          "effort": "xhigh",
+          "label": "Sonnet 5 · xhigh effort (deepest)"
+        },
+        {
+          "id": "opus-low",
+          "model": "claude-opus-4-8",
+          "effort": "low",
+          "label": "Opus 4.8 · low effort (fastest)"
+        },
+        {
+          "id": "opus-medium",
+          "model": "claude-opus-4-8",
+          "effort": "medium",
+          "label": "Opus 4.8 · medium effort"
+        },
+        {
+          "id": "opus-high",
+          "model": "claude-opus-4-8",
+          "effort": "high",
+          "label": "Opus 4.8 · high effort"
+        },
+        {
+          "id": "opus-xhigh",
+          "model": "claude-opus-4-8",
+          "effort": "xhigh",
+          "label": "Opus 4.8 · xhigh effort (deepest)"
+        },
+        {
+          "id": "fable-low",
+          "model": "claude-fable-5",
+          "effort": "low",
+          "label": "Fable 5 · low effort (fastest)"
+        },
+        {
+          "id": "fable-medium",
+          "model": "claude-fable-5",
+          "effort": "medium",
+          "label": "Fable 5 · medium effort"
+        },
+        {
+          "id": "fable-high",
+          "model": "claude-fable-5",
+          "effort": "high",
+          "label": "Fable 5 · high effort"
+        },
+        {
+          "id": "fable-xhigh",
+          "model": "claude-fable-5",
+          "effort": "xhigh",
+          "label": "Fable 5 · xhigh effort (deepest)"
+        },
+        {
+          "id": "haiku",
+          "model": "claude-haiku-4-5",
+          "label": "Haiku 4.5 (no effort setting)"
+        }
+      ]
+    },
+    "deepseek": {
+      "label": "DeepSeek (chat + actions)",
+      "choice": "deepseek-v4-flash",
+      "model": "deepseek-v4-flash",
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "label": "V4 Flash (fast)"
+        },
+        {
+          "id": "deepseek-v4-pro",
+          "label": "V4 Pro (smartest)"
+        }
+      ]
+    },
+    "gemini": {
+      "label": "Gemini",
+      "choice": "gemini-3.5-flash",
+      "model": "gemini-3.5-flash",
+      "models": [
+        {
+          "id": "gemini-3.5-flash",
+          "label": "3.5 Flash (recommended)"
+        },
+        {
+          "id": "gemini-3.1-pro",
+          "label": "3.1 Pro (preview)"
+        },
+        {
+          "id": "gemini-3.1-flash-lite",
+          "label": "3.1 Flash Lite (cheapest)"
+        }
+      ]
+    },
+    "ollama": {
+      "label": "Ollama (local)",
+      "model": "llama3.2",
+      "models": [
+        {
+          "id": "llama3.2",
+          "label": "Llama 3.2"
+        }
+      ],
+      "baseUrl": "http://127.0.0.1:11434"
+    }
+  },
+  "voice": {
+    "autoSpeak": true,
+    "tts": {
+      "engine": "kokoro",
+      "kokoroVoice": "af_heart",
+      "kokoroVoiceFr": "ff_siwis",
+      "voice": "Samantha",
+      "voiceFr": "Amélie",
+      "rate": 190
+    },
+    "stt": {
+      "binary": "bin/whisper/whisper-cli",
+      "model": "large-v3-turbo-q8_0",
+      "language": "auto",
+      "languages": [
+        "en",
+        "fr",
+        "ar"
+      ]
+    }
+  },
+  "commandDeck": [
+    {
+      "id": "stop-task",
+      "label": "■ STOP",
+      "kind": "chat",
+      "target": "stop"
+    },
+    {
+      "id": "briefing",
+      "label": "BRIEFING",
+      "kind": "chat",
+      "target": "Give me a quick spoken briefing: today's date and time, my open objectives, my pending reminders (flag anything due soon), and anything important from our recent conversations. Keep it short and conversational."
+    },
+    {
+      "id": "screen",
+      "label": "SCREEN",
+      "kind": "chat",
+      "target": "Use see_screen, Read the screenshot it returns, and tell me briefly what's on my screen right now."
+    },
+    {
+      "id": "summarize-page",
+      "label": "THIS PAGE",
+      "kind": "chat",
+      "target": "Use the chrome tool: run \"current\" then \"readpage\", and give me a short spoken summary of the page I'm looking at."
+    },
+    {
+      "id": "clear-chat",
+      "label": "CLEAR",
+      "kind": "builtin",
+      "target": "clear"
+    },
+    {
+      "id": "mute",
+      "label": "VOICE ON/OFF",
+      "kind": "builtin",
+      "target": "toggle-speak"
+    }
+  ],
+  "theme": {
+    "accent": "#c084fc",
+    "accent2": "#7dd3fc",
+    "bg": "#07060b"
+  },
+  "dictation": {
+    "hotkey": "CommandOrControl+Shift+D",
+    "mode": "clipboard"
+  },
+  "remote": {
+    "enabled": true
+  },
+  "intent": {
+    "rules": {
+      "open_app": {
+        "priority": 10,
+        "patterns": [
+          "^open\\s+([\\w\\s]+)$"
+        ]
+      },
+      "action": {
+        "priority": 9,
+        "patterns": [
+          "^(close|launch|start|stop|run|show|find|play|pause|send|create|delete|set|turn|navigate|go to|browse|search for|click|type|scroll)"
+        ]
+      },
+      "search": {
+        "priority": 8,
+        "patterns": [
+          "^(search|google|look up|find information about|what is|who is|how to|weather|news)"
+        ]
+      },
+      "dictation": {
+        "priority": 7,
+        "patterns": [
+          "^(start dictation|stop dictation|type this|write this|dictate)"
+        ]
+      },
+      "system_query": {
+        "priority": 5,
+        "patterns": [
+          "^(what time|what day|what date|how are you|status|uptime|cpu|memory|battery|system|hostname)"
+        ]
+      }
+    }
+  },
+  "memory": {
+    "enabled": true,
+    "recallLimit": 5,
+    "recentTurns": 10,
+    "extractFacts": true,
+    "retentionDays": 90
+  },
+  "redaction": {
+    "enabled": true,
+    "patterns": {
+      "email": false,
+      "creditCard": true,
+      "apiKey": true,
+      "phone": false,
+      "ssn": true,
+      "address": false,
+      "ipv4": false
+    }
+  }
+}

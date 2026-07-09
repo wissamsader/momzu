@@ -1,0 +1,14 @@
+node_modules/
+.env
+dist/
+tmp/
+*.log
+.DS_Store
+
+# personal state — never commit
+config/state/
+
+# prebuilt binaries for the self-contained DMG (see bin/README.md)
+bin/*
+!bin/speech-recognizer.swift
+!bin/README.md
