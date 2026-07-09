@@ -38,16 +38,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;600&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #050608;
-  --panel: #0b0d11;
+  --bg: #101318;
+  --panel: #171b22;
   --ring-sleep: #2c4a63;
   --ring-awake: #56bdff;
   --slit-a: #9fb8c8;
   --slit-b: #5b7f96;
   --white: #dff8ff;
-  --text: #c4c8d0;
-  --dim: #52565f;
-  --dimmer: #33363d;
+  --text: #d8dce4;
+  --dim: #9298a6;
+  --dimmer: #565b66;
   --line: rgba(255,255,255,0.07);
   --mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
   --display: 'Unbounded', system-ui, sans-serif;
@@ -305,7 +305,7 @@ section { position: relative; z-index: 2; }
   color: #dde3ea; margin-bottom: 14px; letter-spacing: 0.22em;
 }
 .ability p {
-  font-size: 13px; line-height: 1.9; color: var(--dim);
+  font-size: 14px; line-height: 1.85; color: var(--dim);
   max-width: 54ch; letter-spacing: 0.03em;
 }
 .ability .key {
@@ -415,7 +415,7 @@ section { position: relative; z-index: 2; }
 }
 .d3boxlbl {
   position: absolute; top: -6px; left: 14px;
-  background: #0a0c10; padding: 0 8px;
+  background: #161a21; padding: 0 8px;
   font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--dim);
 }
@@ -424,7 +424,7 @@ section { position: relative; z-index: 2; }
   width: 122px; text-align: center;
   padding: 7px 0;
   border: 1px solid var(--line); border-radius: 7px;
-  background: #0b0d11;
+  background: #171b22;
   font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
   color: #aeb4bd;
   z-index: 2;
@@ -471,11 +471,11 @@ section { position: relative; z-index: 2; }
 .d4win {
   position: relative; height: 100%; max-width: 340px; margin: 0 auto;
   border: 1px solid var(--line); border-radius: 10px;
-  background: #08090c;
+  background: #141820;
   overflow: hidden;
 }
 .d4top { display: flex; align-items: center; gap: 6px; padding: 9px 12px; border-bottom: 1px solid var(--line); }
-.d4top i { width: 7px; height: 7px; border-radius: 50%; background: #1d2025; }
+.d4top i { width: 7px; height: 7px; border-radius: 50%; background: #262a31; }
 .d4url { margin-left: 8px; font-size: 8px; letter-spacing: 0.22em; color: var(--dim); text-transform: uppercase; }
 .d4field {
   margin: 14px 14px 0; height: 26px;
@@ -568,7 +568,7 @@ section { position: relative; z-index: 2; }
   border: 1px solid var(--line); border-radius: 8px;
   padding: 8px;
   display: flex; flex-direction: column; gap: 6px;
-  background: #08090c;
+  background: #141820;
 }
 .d5page > * { opacity: 0; animation: d5el 9s ease infinite; }
 .p-top { height: 7px; background: rgba(255,255,255,0.12); border-radius: 2px; animation-delay: 2.3s; }
@@ -598,14 +598,14 @@ section { position: relative; z-index: 2; }
 .d6desk {
   position: relative; height: 100%; max-width: 340px; margin: 0 auto;
   border: 1px solid var(--line); border-radius: 10px;
-  background: #08090c;
+  background: #141820;
   overflow: hidden;
 }
 .d6bar { height: 12px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.02); }
 .d6win {
   position: absolute;
   border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
-  background: #0b0d11;
+  background: #171b22;
   animation: d6flash 5.5s infinite;
 }
 .d6win.a { left: 18px; top: 26px; width: 45%; height: 80px; }
@@ -819,7 +819,7 @@ section { position: relative; z-index: 2; }
   padding: 9px;
   border: 1px solid var(--line); border-radius: 8px;
   position: relative; overflow: hidden;
-  background: #08090c;
+  background: #141820;
 }
 .d13qr i { background: rgba(255,255,255,0.07); border-radius: 1.5px; }
 .d13qr i.f { background: #9fb8c8; }
@@ -838,7 +838,7 @@ section { position: relative; z-index: 2; }
 .d13phone {
   width: 84px; height: 154px;
   border: 1px solid rgba(255,255,255,0.14); border-radius: 16px;
-  background: #08090c;
+  background: #141820;
   position: relative;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
   animation: d13ph 6s infinite;
@@ -905,7 +905,7 @@ section { position: relative; z-index: 2; }
   border-bottom: 1px solid var(--line);
 }
 .window .lights { display: flex; gap: 8px; }
-.window .lights i { width: 11px; height: 11px; border-radius: 50%; background: #1d2025; }
+.window .lights i { width: 11px; height: 11px; border-radius: 50%; background: #262a31; }
 .window .wtitle { letter-spacing: 0.3em; font-size: 10px; color: #9aa0aa; font-weight: 500; }
 .window .wclock { font-size: 10px; color: var(--dimmer); letter-spacing: 0.15em; }
 .window .body {
