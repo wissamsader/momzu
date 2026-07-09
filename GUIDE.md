@@ -12,10 +12,23 @@ run locally on your Mac.
 
 ## Install
 
-1. Open the file `Momzu-x.x.x-arm64.dmg`.
+**The easy way (recommended):** open the **Terminal** app, paste this one
+line, and press Enter — it downloads Momzu, installs it into Applications,
+and opens it, with no security warnings:
+
+    curl -fsSL https://momzu.space/install.sh | bash
+
+**Or by hand, with the DMG:**
+
+1. Open the file `Momzu.dmg`.
 2. Drag **Momzu** into your **Applications** folder.
-3. Open Momzu from Applications. The first time, macOS may ask you to confirm —
-   if it does, right-click the app, choose **Open**, then **Open** again.
+3. Open Momzu from Applications. macOS will likely block it — often with a
+   misleading **"Momzu is damaged"** message. The app isn't damaged; it just
+   isn't signed with an Apple developer certificate. Open **Terminal**,
+   paste this line, press Enter, then open Momzu again — it works from
+   then on:
+
+       xattr -cr /Applications/Momzu.app
 4. When macOS asks for **Microphone** and **Speech Recognition** access, click
    **Allow**. Momzu can't hear you without it.
 5. On first launch Momzu sets itself up, one time only: it downloads its

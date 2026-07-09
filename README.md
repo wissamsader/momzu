@@ -18,7 +18,7 @@ free · apple silicon · no account · no tracking
 
 ## Two minutes of setup
 
-1. **Open it** — drag Momzu into Applications. First launch: right-click → **Open** → **Open** (it's unsigned). Allow the microphone. On first launch it sets itself up once: ~900 MB of ears plus its natural voice (needs Python 3 on your Mac — without it you get the standard Mac voice until you install Python from python.org).
+1. **Open it** — easiest: paste `curl -fsSL https://momzu.space/install.sh | bash` in Terminal (installs with no warnings). Installing the DMG by hand instead? Drag Momzu into Applications; macOS will call the app **"damaged"** — it isn't, it's just unsigned: paste `xattr -cr /Applications/Momzu.app` in Terminal once and it opens fine. Allow the microphone. On first launch it sets itself up once: ~900 MB of ears plus its natural voice (needs Python 3 on your Mac — without it you get the standard Mac voice until you install Python from python.org).
 2. **Connect a mind** — Momzu is the body; you pick the brain:
    - **Claude (recommended)** — you need a Claude subscription (Pro/Max) and the [Claude Code](https://claude.com/claude-code) command-line tool: open Terminal, run `curl -fsSL https://claude.ai/install.sh | bash`, then run `claude` once and follow the sign-in link. Momzu finds it automatically from then on.
    - **DeepSeek / Gemini** — create an API key (platform.deepseek.com / aistudio.google.com), press **KEYS** in Momzu's top bar, paste it.

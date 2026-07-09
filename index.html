@@ -1015,6 +1015,21 @@ section { position: relative; z-index: 2; }
 .dl-setup a { color: #8fb8cf; text-decoration: none; border-bottom: 1px solid rgba(143,184,207,0.35); }
 .dl-setup .ds-note { margin-top: 20px; font-size: 10px; letter-spacing: 0.15em; color: var(--dimmer); }
 
+/* one-line terminal install */
+.dl-alt { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 11px; }
+.dl-alt-label { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dim); }
+.shellline {
+  font-family: inherit; display: inline-flex; align-items: center; gap: 16px;
+  background: rgba(86,189,255,0.05); border: 1px solid rgba(86,189,255,0.18);
+  border-radius: 8px; padding: 11px 18px; cursor: pointer;
+  transition: border-color .25s, background .25s; max-width: calc(100vw - 44px);
+}
+.shellline:hover { border-color: rgba(86,189,255,0.45); background: rgba(86,189,255,0.09); }
+.shellline code { font-size: 12px; color: #9fc6de; letter-spacing: 0.02em; word-break: break-all; text-align: left; }
+.shellline i { font-style: normal; font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); flex-shrink: 0; }
+.shellline.copied { border-color: rgba(86,189,255,0.6); }
+.shellline.copied i { color: #56bdff; }
+
 /* coffee */
 .coffee {
   margin-top: 6vh;
@@ -1446,6 +1461,13 @@ footer a:hover { color: var(--text); }
   </a>
   <div class="dl-meta reveal">free · apple silicon · no account · no tracking</div>
 
+  <div class="dl-alt reveal">
+    <span class="dl-alt-label">easiest — paste this in terminal · installs with no warnings</span>
+    <button class="shellline" type="button" data-copy="curl -fsSL https://momzu.space/install.sh | bash">
+      <code>curl -fsSL https://momzu.space/install.sh | bash</code><i>copy</i>
+    </button>
+  </div>
+
   <a class="coffee reveal" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24">
       <path d="M5 10h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-6z"/>
@@ -1459,7 +1481,7 @@ footer a:hover { color: var(--text); }
   <div class="dl-setup reveal">
     <div class="ds-title">two minutes of setup</div>
     <ol>
-      <li><b>open it</b> — drag momzu into applications. first launch: right-click → open → open (it's unsigned). allow the microphone. it downloads its ears once (~900 mb, one time).</li>
+      <li><b>open it</b> — easiest: the one-line installer above does everything (download, install, open — no warnings). installing the dmg by hand instead? drag momzu into applications; macos will call the app <b>"damaged"</b> — it isn't, it's just unsigned. paste <code>xattr -cr /Applications/Momzu.app</code> in terminal once and it opens fine. allow the microphone. first launch downloads its ears + natural voice (one time).</li>
       <li><b>connect a mind</b> — momzu is the body; you pick the brain. using <b>claude</b> (recommended)? install <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude code</a> in terminal — <code>curl -fsSL https://claude.ai/install.sh | bash</code> — then run <code>claude</code> once and sign in with your claude account. otherwise press <b>keys</b> in momzu and paste a deepseek or gemini api key — or go fully offline with ollama.</li>
       <li><b>talk</b> — hold space and speak, or press ⌃⌥⌘ from anywhere. a soft chime means it got you.</li>
     </ol>
@@ -1706,6 +1728,20 @@ footer a:hover { color: var(--text); }
     });
   }, { threshold: 0.6 }).observe(target);
 })();
+</script>
+<script>
+// click-to-copy for terminal one-liners
+document.querySelectorAll('.shellline').forEach((el) => {
+  el.addEventListener('click', () => {
+    navigator.clipboard.writeText(el.dataset.copy).then(() => {
+      const i = el.querySelector('i');
+      const old = i.textContent;
+      el.classList.add('copied');
+      i.textContent = 'copied';
+      setTimeout(() => { i.textContent = old; el.classList.remove('copied'); }, 1600);
+    }).catch(() => { /* clipboard blocked — text is selectable anyway */ });
+  });
+});
 </script>
 </body>
 </html>
