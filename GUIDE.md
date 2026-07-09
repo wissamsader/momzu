@@ -18,9 +18,16 @@ run locally on your Mac.
    if it does, right-click the app, choose **Open**, then **Open** again.
 4. When macOS asks for **Microphone** and **Speech Recognition** access, click
    **Allow**. Momzu can't hear you without it.
-5. On first launch Momzu downloads its ears — a ~900 MB speech model, one
-   time only. You can type to it right away; the ticker at the bottom shows
-   the download progress, and the voice gets sharp when it finishes.
+5. On first launch Momzu sets itself up, one time only: it downloads its
+   ears (a ~900 MB speech model) and installs its natural neural voice
+   (a few hundred MB more). You can type to it right away; the ticker at
+   the bottom shows the progress. Momzu speaks with the plain Mac voice
+   until the natural one is ready.
+
+> **The natural voice needs Python 3 on your Mac.** Most Macs that have
+> Homebrew or the Apple developer tools already have it. If yours doesn't,
+> install it free from [python.org](https://www.python.org/downloads/) and
+> reopen Momzu — everything still works meanwhile, just with the plain voice.
 
 Momzu also puts a small face in the **menu bar** (top right of your screen)
 and starts automatically when you log in — you can turn that off from the
