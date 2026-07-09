@@ -1016,7 +1016,11 @@ section { position: relative; z-index: 2; }
 .dl-setup .ds-note { margin-top: 20px; font-size: 10px; letter-spacing: 0.15em; color: var(--dimmer); }
 
 /* one-line terminal install */
-.dl-alt { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 11px; }
+.dl-alt { display: flex; flex-direction: column; align-items: center; gap: 13px; }
+.dl-alt-hint { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dimmer); max-width: 520px; line-height: 1.9; }
+.shellline.primary { padding: 15px 24px; border-color: rgba(86,189,255,0.35); background: rgba(86,189,255,0.08); }
+.shellline.primary code { font-size: 13.5px; }
+.shellline.primary:hover { border-color: rgba(86,189,255,0.65); box-shadow: 0 0 40px rgba(86,189,255,0.12); }
 .dl-alt-label { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--dim); }
 .shellline {
   font-family: inherit; display: inline-flex; align-items: center; gap: 16px;
@@ -1454,19 +1458,14 @@ footer a:hover { color: var(--text); }
 <section class="download" id="download">
   <div class="halo"></div>
   <h2 class="big reveal">Free.<br><span class="ghost">Because it should be.</span></h2>
-  <a class="btn reveal" href="https://github.com/wissamsader/momzu/releases/latest/download/Momzu.dmg">
-    <i class="fill"></i>
-    <svg class="apple" viewBox="0 0 814 1000"><path d="M788 341c-6 4-109 62-109 190 0 148 130 200 134 202-1 3-21 72-69 142-43 62-88 124-156 124s-86-40-165-40c-77 0-104 41-167 41s-107-57-157-127C41 790 0 663 0 543c0-193 126-296 249-296 66 0 121 44 162 44 39 0 100-46 175-46 28 0 130 2 202 96zM554 127c31-37 53-88 53-139 0-7-1-14-2-20-51 2-111 34-147 76-29 33-56 84-56 136 0 8 1 16 2 18 3 1 8 2 13 2 46 0 103-30 137-73z"/></svg>
-    <span>download for macos</span>
-  </a>
-  <div class="dl-meta reveal">free · apple silicon · no account · no tracking</div>
-
   <div class="dl-alt reveal">
-    <span class="dl-alt-label">easiest — paste this in terminal · installs with no warnings</span>
-    <button class="shellline" type="button" data-copy="curl -fsSL https://momzu.space/install.sh | bash">
+    <span class="dl-alt-label">install for macos — copy this line · it does everything</span>
+    <button class="shellline primary" type="button" data-copy="curl -fsSL https://momzu.space/install.sh | bash">
       <code>curl -fsSL https://momzu.space/install.sh | bash</code><i>copy</i>
     </button>
+    <span class="dl-alt-hint">open terminal (⌘ space, type "terminal"), paste, press enter. momzu installs and opens itself.</span>
   </div>
+  <div class="dl-meta reveal">free · apple silicon · no account · no tracking</div>
 
   <a class="coffee reveal" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24">
@@ -1481,7 +1480,7 @@ footer a:hover { color: var(--text); }
   <div class="dl-setup reveal">
     <div class="ds-title">two minutes of setup</div>
     <ol>
-      <li><b>open it</b> — easiest: the one-line installer above does everything (download, install, open — no warnings). installing the dmg by hand instead? drag momzu into applications; macos will call the app <b>"damaged"</b> — it isn't, it's just unsigned. paste <code>xattr -cr /Applications/Momzu.app</code> in terminal once and it opens fine. allow the microphone. first launch downloads its ears + natural voice (one time).</li>
+      <li><b>install</b> — paste the line above into terminal, press enter. momzu downloads, installs, and opens itself. allow the microphone when it asks; first launch fetches its ears + natural voice (one time).</li>
       <li><b>connect a mind</b> — momzu is the body; you pick the brain. using <b>claude</b> (recommended)? install <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude code</a> in terminal — <code>curl -fsSL https://claude.ai/install.sh | bash</code> — then run <code>claude</code> once and sign in with your claude account. otherwise press <b>keys</b> in momzu and paste a deepseek or gemini api key — or go fully offline with ollama.</li>
       <li><b>talk</b> — hold space and speak, or press ⌃⌥⌘ from anywhere. a soft chime means it got you.</li>
     </ol>
