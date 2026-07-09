@@ -35,5 +35,7 @@ MOUNT=""
 xattr -cr /Applications/Momzu.app 2>/dev/null || true
 
 echo "▸ Opening Momzu…"
-open -a Momzu
+# Open by path — LaunchServices can be slow to learn the name of a
+# just-installed app, which makes `open -a Momzu` fail on first install.
+open /Applications/Momzu.app
 echo "✓ Done — Momzu is installed in your Applications folder."
