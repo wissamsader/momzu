@@ -965,7 +965,14 @@ section { position: relative; z-index: 2; }
   background: radial-gradient(circle, rgba(86,189,255,0.07), transparent 60%);
   pointer-events: none;
 }
-.download .big { max-width: none; margin-bottom: 8vh; }
+.download .big { max-width: none; margin-bottom: 22px; }
+.dl-oss {
+  display: inline-block; margin-bottom: 7vh; padding-bottom: 4px;
+  font-family: var(--mono); font-size: 14px; letter-spacing: 0.34em; text-transform: uppercase;
+  color: #8fb8cf; text-decoration: none; border-bottom: 1px solid rgba(143,184,207,0.35);
+  transition: color .3s, border-color .3s;
+}
+.dl-oss:hover { color: #cfe6f5; border-color: rgba(143,184,207,0.7); }
 
 .btn {
   position: relative;
@@ -999,7 +1006,7 @@ section { position: relative; z-index: 2; }
   font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim);
 }
 .dl-meta b { color: #8fb8cf; font-weight: 400; }
-.dl-meta a { color: #8fb8cf; text-decoration: none; border-bottom: 1px solid rgba(143,184,207,0.35); }
+.dl-alt-hint a { color: #8fb8cf; text-decoration: none; border-bottom: 1px solid rgba(143,184,207,0.35); }
 
 /* setup steps */
 .dl-setup {
@@ -1459,14 +1466,16 @@ footer a:hover { color: var(--text); }
 <section class="download" id="download">
   <div class="halo"></div>
   <h2 class="big reveal">Free.<br><span class="ghost">Because it should be.</span></h2>
+  <a class="dl-oss reveal" href="https://github.com/wissamsader/momzu" target="_blank" rel="noopener">open source</a>
   <div class="dl-alt reveal">
     <span class="dl-alt-label">install for macos — copy this line · it does everything</span>
     <button class="shellline primary" type="button" data-copy="curl -fsSL https://momzu.space/install.sh | bash">
       <code>curl -fsSL https://momzu.space/install.sh | bash</code><i>copy</i>
     </button>
     <span class="dl-alt-hint">open terminal (⌘ space, type "terminal"), paste, press enter. momzu installs and opens itself.</span>
+    <span class="dl-alt-hint">or <a href="https://github.com/wissamsader/momzu/releases/latest" target="_blank" rel="noopener">download it from github</a> directly — first-open steps in the <a href="guide.txt" target="_blank" rel="noopener">guide</a>.</span>
   </div>
-  <div class="dl-meta reveal">free · <a href="https://github.com/wissamsader/momzu" target="_blank" rel="noopener">open source</a> · apple silicon · no account · no tracking</div>
+  <div class="dl-meta reveal">free · open source · apple silicon · no account · no tracking</div>
 
   <a class="coffee reveal" href="https://buymeacoffee.com/wissamsader" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24">
